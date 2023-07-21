@@ -1,3 +1,4 @@
+
 #download dataset into browser 
 from pyodide.http import pyfetch
 
@@ -28,6 +29,9 @@ from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
 from sklearn.model_selection import cross_val_score
 from sklearn.model_selection import cross_val_predict
+from sklearn.preprocessing import PolynomialFeatures
+
+interact(f, order=(0, 6, 1), test_data=(0.05, 0.95, 0.05))#互动（x,y,z）范围x-y,步数z
 
 #function of plotting
 def DistributionPlot(RedFunction, BlueFunction, RedName, BlueName, Title):
