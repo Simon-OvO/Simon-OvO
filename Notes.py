@@ -10,13 +10,17 @@ async def download(url, filename):
         with open(filename, "wb") as f:
             f.write(await response.bytes())
 #lib
-import piplite
-await piplite.install(['pandas'])
-await piplite.install(['matplotlib'])
-await piplite.install(['scipy'])
-await piplite.install(['scikit-learn'])
-await piplite.install(['skillsnetwork', 'seaborn'])
-
+data     'pandas'(openpyxl(read excel))
+         'scipy'
+analyse  'scikit-learn'
+         'skillsnetwork'
+         'seaborn'
+visualize'matplotlib'
+         'pandas'
+         'seaborn'
+         'Foleyum'#交互
+         'Plotly'#交互
+         'PyWaffle'#比例可视化
 #method
 import pandas as pd
 import numpy as np
@@ -26,12 +30,14 @@ import warnings
 warnings.filterwarnings('ignore')
 from ipywidgets import interact, interactive, fixed, interact_manual
 from sklearn.model_selection import train_test_split
-from sklearn.linear_model import LinearRegression
 from sklearn.model_selection import cross_val_score
 from sklearn.model_selection import cross_val_predict
-from sklearn.preprocessing import PolynomialFeatures
-from sklearn.linear_model import Ridge
 from sklearn.model_selection import GridSearchCV
+from sklearn.preprocessing import PolynomialFeatures
+from sklearn.preprocessing import StandardScaler
+from sklearn.linear_model import Ridge
+from sklearn.linear_model import LinearRegression
+
 
 interact(f, order=(0, 6, 1), test_data=(0.05, 0.95, 0.05))#互动（x,y,z）范围x-y,步数z
 
@@ -82,3 +88,5 @@ x_train, x_test, y_train, y_test = train_test_split(x_data, y_data, test_size=0.
 print("number of test samples :", x_test.shape[0])
 print("number of training samples:",x_train.shape[0])
 
+#tips
+#regplot设置散点透明度scatter_kws={'alpha':1/3}
