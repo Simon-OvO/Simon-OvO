@@ -90,3 +90,6 @@ print("number of training samples:",x_train.shape[0])
 
 #tips
 #regplot设置散点透明度scatter_kws={'alpha':1/3}
+np.histogram#设置binedge
+matplotlib.pyplot.annotate#添加文本text：str  xy(float, float)
+
