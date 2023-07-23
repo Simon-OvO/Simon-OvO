@@ -19,6 +19,8 @@ text = io.BytesIO((await resp.arrayBuffer()).to_py())#BytesIO读取字节文件,
 df_can = pd.read_csv(text)
 }
 df_can = pd.read_csv（''）
+import urllib
+alice_novel = urllib.request.urlopen('')
 
 #lib
 data     'pandas'(openpyxl(read excel))
@@ -157,6 +159,9 @@ print("number of training samples:",x_train.shape[0])
 #tips
 #regplot设置散点透明度scatter_kws={'alpha':1/3}
 np.histogram#设置binedge
+np.zeros(((height, width), dtype = np.uint))
 matplotlib.pyplot.annotate#添加文本text：str  xy(float, float)
-
-
+matplotlib.pyplot.gca（）#获取当前轴
+np.arange([start, ]stop, [step, ]dtype=None, *, like=None)#设置间隔区间 np.arange(3,7,2)array([3, 5])
+Axes.set_xticks(ticks, labels=None, *, minor=False, **kwargs)#minor次要刻度
+Axes.grid(visible=None, which='major', axis='both', **kwargs)#网格线
