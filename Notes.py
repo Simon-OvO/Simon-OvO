@@ -58,6 +58,7 @@ visualize'matplotlib'{Line：plt.plot(x, y, color='red', linewidth=2)
          'Foleyum'#交互
          'Plotly'#交互
          'PyWaffle'#比例可视化 
+         'dash'#实时交互{}
 #图表类型
 pie#autopct='%1.1f%%'显示百分比,explode = [0,0,0,0,0.1]突出显示
 
@@ -77,6 +78,12 @@ from sklearn.preprocessing import PolynomialFeatures
 from sklearn.preprocessing import StandardScaler
 from sklearn.linear_model import Ridge
 from sklearn.linear_model import LinearRegression
+import plotly.graph_objects as go
+import plotly.express as px
+import dash
+from dash import html
+from dash import dcc
+from dash.dependencies import Input, Output
 
 
 interact(f, order=(0, 6, 1), test_data=(0.05, 0.95, 0.05))#互动（x,y,z）范围x-y,步数z
