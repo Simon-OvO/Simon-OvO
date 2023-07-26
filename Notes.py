@@ -18,7 +18,14 @@ resp = await fetch(URL)
 text = io.BytesIO((await resp.arrayBuffer()).to_py())#BytesIO读取字节文件,arraybuffer返回一个 promise 对象
 df_can = pd.read_csv(text)
 }
-df_can = pd.read_csv（''）
+
+df = pd.read_csv（'',encoding = "ISO-8859-1"）#GB2312/GBK(汉字),unicode,UTF（兼容ISO-8859-1，比unicode简单）
+airline_data =  pd.read_csv('https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBMDeveloperSkillsNetwork-DV0101EN-SkillsNetwork/Data%20Files/airline_data.csv', 
+                            encoding = "ISO-8859-1",
+                            dtype={'Div1Airport': str, 'Div1TailNum': str, 
+                                   'Div2Airport': str, 'Div2TailNum': str})
+
+#文本
 import urllib
 alice_novel = urllib.request.urlopen('')
 
@@ -50,42 +57,7 @@ visualize'matplotlib'{Line：plt.plot(x, y, color='red', linewidth=2)
          'seaborn'#countplot分类计数
          'Foleyum'#交互
          'Plotly'#交互
-         'PyWaffle'#比例可视化 {#compute the proportion of each category with respect to the total
-             total_values = df_dsn['*'].sum()
-             category_proportions = df_dsn['*'] / total_values
-             
-             width = 40
-             height = 10
-             # compute the number of tiles for each category
-             tiles_per_category = (category_proportions * total_num_tiles).round().astype(int)
-             waffle_chart = np.zeros((height, width), dtype = np.uint)
-             
-             # define indices to loop through waffle chart
-             category_index = 0
-             tile_index = 0
-             
-             # populate the waffle chart
-             for col in range(width):
-                for row in range(height):
-                   tile_index += 1
-
-                   # if the number of tiles populated for the current category is equal to its corresponding allocated tiles...
-                   if tile_index > sum(tiles_per_category[0:category_index]):
-                   # ...proceed to the next category
-                       category_index += 1       
-            
-                   # set the class value to an integer, which increases with class
-                   waffle_chart[row, col] = category_index
-             
-            print ('Waffle chart populated!')
-            # instantiate a new figure object
-            fig = plt.figure()
-            # use matshow to display the waffle chart
-            colormap = plt.cm.coolwarm
-            plt.matshow(waffle_chart, cmap=colormap)
-            plt.colorbar()
-            plt.show()
-
+         'PyWaffle'#比例可视化 
 #图表类型
 pie#autopct='%1.1f%%'显示百分比,explode = [0,0,0,0,0.1]突出显示
 
