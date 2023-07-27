@@ -56,9 +56,27 @@ visualize'matplotlib'{Line：plt.plot(x, y, color='red', linewidth=2)
 
          'seaborn'#countplot分类计数
          'Foleyum'#交互
-         'Plotly'#交互
+         'Plotly'#交互{
+                       
+         }
+         Ploty Express#简洁图表{px.scatter(dataframe, x=x_column, y=y_column，title='title')
+                               px.line( x=x_column, y=y_column,'title')
+                               px.bar( x=x_column, y=y_column,title='title')
+                               px.sunburst(dataframe, path=[col1,col2..], values='column',title='title')
+                               px.histogram(x=x,title="title")
+                               px.scatter(bub_data, x="City", y="Numberofcrimes",size="Numberofcrimes",hover_name="City", title='Crime Statistics')    #bubble
+                               px.pie(values=x,names=y,title="title")
+                               }
+         Plotly Graph Objects{go.Scatter(x=x, y=y, mode='markers') #mode='lines'
+                              fig.add_trace(go.Scatter(x=months_array, y=no_bicycle_sold_array))
+                              fig.update_layout(title='Bicycle Sales', xaxis_title='Months', yaxis_title='Number of Bicycles Sold                     
+                              }
          'PyWaffle'#比例可视化 
-         'dash'#实时交互{}
+         'dash'#实时交互{dcc.Input(value='', type='text')
+                        dcc.Graph(figure=fig)
+                        html.Div(children=component_list,style={})
+                        dcc.Dropdown(options=options_list, value=default_value
+         }
 #图表类型
 pie#autopct='%1.1f%%'显示百分比,explode = [0,0,0,0,0.1]突出显示
 
