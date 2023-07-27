@@ -144,3 +144,5 @@ matplotlib.pyplot.gca（）#获取当前轴
 np.arange([start, ]stop, [step, ]dtype=None, *, like=None)#设置间隔区间 np.arange(3,7,2)array([3, 5])
 Axes.set_xticks(ticks, labels=None, *, minor=False, **kwargs)#minor次要刻度
 Axes.grid(visible=None, which='major', axis='both', **kwargs)#网格线
+html.Div([html.Div()，html.Div()],style={"display":'flex'})#flex表示并列排列
+html.Br()#换行
