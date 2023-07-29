@@ -232,3 +232,4 @@ html.Div([html.Div()，html.Div()],style={"display":'flex'})#flex表示并列排
 html.Br()#换行
 df['Month'] = pd.to_datetime(df['Date']).dt.month#提取月份
 df['Region'].unique()#唯一值，仅用于series
+plt.xticks(ticks=[0, 1], labels=['Non-Recession', 'Recession'])
