@@ -220,6 +220,7 @@ print("number of test samples :", x_test.shape[0])
 print("number of training samples:",x_train.shape[0])
 
 #tips
+"* {} *".format()#字符串插入动态值
 #regplot设置散点透明度scatter_kws={'alpha':1/3}
 np.histogram#设置binedge
 np.zeros(((height, width), dtype = np.uint))
