@@ -26,12 +26,44 @@ airline_data =  pd.read_csv('https://cf-courses-data.s3.us.cloud-object-storage.
                                    'Div2Airport': str, 'Div2TailNum': str})
 
 #文本
+import requests
+data  = requests.get(url).text
+
 import urllib
 alice_novel = urllib.request.urlopen('')
 
 #lib
-data     'pandas'(openpyxl(read excel))
-         'scipy'
+data     'pandas'(df.drop_duplicates(subset=None,keep='first',inplace=False)#subset列名
+                  df.info() #显示各列有多少非空值
+                  df.isnull()#显示那个值为缺失值
+                  df.dropna()
+                  df.fillna(0)
+                  series.value_counts()#计算值频率
+
+         'scipy'#统计{stats.kstest(s['value'], 'norm', (u, std))
+                      KstestResult(statistic=0.01441344628501079, pvalue=0.9855029319675546)，p值大于0.05为正太分布}
+          numpy{np.select#类似excel中xlookup）
+                 condlist=[dnp[:,0]=='Yearly',dnp[:,0]=='Monthly',dnp[:,0]=='Weekly']
+                 choicelist=[1,12,52]
+                 df['NormalizedAnnualCompensation']=pd.DataFrame(np.select(condlist,choicelist)*dnp[:,1])
+
+
+webscraping         from bs4 import BeautifulSoup  soup = BeautifulSoup(data,"html5lib")
+
+                    for link in soup.find_all('a'):  # in html anchor/link is represented by the tag <a>
+                         print(link.get('href'))#<a> 标签的 href 属性用于指定超链接目标的 URL
+                        
+                    for link in soup.find_all('img'):# in html image is represented by the tag <img>
+                         print(link.get('src'))#<img> 标签的 src 属性是图像文件的 URL
+                        
+                    table = soup.find('table') # in html table is represented by the tag <table>
+                    for row in table.find_all('tr'): # in html table row is represented by the tag <tr>
+                        # Get all columns in each row.
+                        cols = row.find_all('td') # in html a column is represented by the tag <td>
+                        color_name = cols[2].getText() # store the value in column 3 as color_name
+                        color_code = cols[3].getText() # store the value in column 4 as color_code
+                        print("{}--->{}".format(color_name,color_code))
+                        
 analyse  'scikit-learn'
          'skillsnetwork'
          'seaborn'
