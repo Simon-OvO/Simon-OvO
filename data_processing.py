@@ -27,6 +27,7 @@ conn = sqlite3.connect("m4_survey_data.sqlite") # open a database connection
 df = pd.read_sql_query(QUERY,conn) #QUERY为要执行的sql语句
 }
 
+pandas.pivot_table()
 #数据清洗
 #空值、重复值、异常值
 df.drop_duplicates(subset=None,keep='first',inplace=False)#去除重复值，subset列名
