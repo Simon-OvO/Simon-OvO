@@ -159,7 +159,7 @@ Aus_map.add_child(aus_reg)}
          }
          Ploty Express#简洁图表{px.scatter(dataframe, x=x_column, y=y_column，title='title')
                                px.line( x=x_column, y=y_column,'title')
-                               px.bar( x=x_column, y=y_column,title='title')
+                               px.bar( x=x_column, y=y_column,title='title',oritention=“h)
                                px.sunburst(dataframe, path=[col1,col2..], values='column',title='title')
                                px.histogram(x=x,title="title")
                                px.scatter(bub_data, x="City", y="Numberofcrimes",size="Numberofcrimes",hover_name="City", title='Crime Statistics')    #bubble
