@@ -42,7 +42,10 @@ data     'pandas'(df.drop_duplicates(subset=None,keep='first',inplace=False)#sub
 
          'scipy'#统计{stats.kstest(s['value'], 'norm', (u, std))
                       KstestResult(statistic=0.01441344628501079, pvalue=0.9855029319675546)，p值大于0.05为正太分布}
-          numpy{np.select#类似excel中xlookup）
+          numpy{linspace
+                np.transpose()/ndarray.T
+                numpy.linalg.inv()#倒数
+                np.select#类似excel中xlookup）
                  condlist=[dnp[:,0]=='Yearly',dnp[:,0]=='Monthly',dnp[:,0]=='Weekly']
                  choicelist=[1,12,52]
                  df['NormalizedAnnualCompensation']=pd.DataFrame(np.select(condlist,choicelist)*dnp[:,1])
@@ -64,7 +67,15 @@ webscraping         from bs4 import BeautifulSoup  soup = BeautifulSoup(data,"ht
                         color_code = cols[3].getText() # store the value in column 4 as color_code
                         print("{}--->{}".format(color_name,color_code))
                         
-analyse  'scikit-learn'
+analyse  'scikit-learn'{from sklearn.linear_model import LinearRegression
+                        reg=LinearRegression()
+                        reg.fit(x,y)
+                        reg.coef_
+                        reg.intercept_
+                        reg.predict()
+                        sklearn.preprocessing.MinMaxScaler(feature_range=(0, 1), *, copy=True, clip=False)#标准化多项式回归
+                        sklearn.preprocessing.StandardScaler(*, copy=True, with_mean=True, with_std=True)
+}
          'skillsnetwork'
          'seaborn'
 visualize'matplotlib'x和y：表示标签或者位置，用来指定显示的索引，默认为None
