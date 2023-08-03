@@ -1,3 +1,5 @@
+%matplotlib inline #用于将matplotlib 绘制的图形嵌入到Notebook 中
+
 #lib
 data     'pandas'(df.drop_duplicates(subset=None,keep='first',inplace=False)#subset列名
                   df.info() #显示各列有多少非空值
