@@ -1,6 +1,9 @@
 #数据获取
 
-{#使用异步函数（async）调取数据可以避免长时等待数据调取
+#download dataset into browser csv/json/excel/sql
+{from pyodide.http import pyfetch
+
+#使用异步函数（async）调取数据可以避免长时等待数据调取
 #使用await表示等待异步函数完成后再执行下一步操作
 async def download(url, filename):
     response = await pyfetch(url)
@@ -14,6 +17,9 @@ airline_data =  pd.read_csv('https://cf-courses-data.s3.us.cloud-object-storage.
                             encoding = "ISO-8859-1",
                             dtype={'Div1Airport': str, 'Div1TailNum': str, 
                                    'Div2Airport': str, 'Div2TailNum': str})
+
+df.to_csv(path)#导出数据
+
 #文本
 import requests
 data  = requests.get(url).text
