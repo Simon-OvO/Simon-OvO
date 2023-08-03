@@ -1,5 +1,5 @@
 
-#download dataset into browser 
+#download dataset into browser csv/json/excel/sql
 {from pyodide.http import pyfetch
 
 #使用异步函数（async）调取数据可以避免长时等待数据调取
@@ -10,20 +10,14 @@ async def download(url, filename):
         with open(filename, "wb") as f:
             f.write(await response.bytes())
 }
-{from js import fetch
-import io
-
-URL = ""
-resp = await fetch(URL)
-text = io.BytesIO((await resp.arrayBuffer()).to_py())#BytesIO读取字节文件,arraybuffer返回一个 promise 对象
-df_can = pd.read_csv(text)
-}
 
 df = pd.read_csv（'',encoding = "ISO-8859-1"）#GB2312/GBK(汉字),unicode,UTF（兼容ISO-8859-1，比unicode简单）
 airline_data =  pd.read_csv('https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBMDeveloperSkillsNetwork-DV0101EN-SkillsNetwork/Data%20Files/airline_data.csv', 
                             encoding = "ISO-8859-1",
                             dtype={'Div1Airport': str, 'Div1TailNum': str, 
                                    'Div2Airport': str, 'Div2TailNum': str})
+
+df.to_csv(path)#导出数据
 
 #文本
 import requests
