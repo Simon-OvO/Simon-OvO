@@ -1,31 +1,3 @@
-
-#download dataset into browser csv/json/excel/sql
-{from pyodide.http import pyfetch
-
-#使用异步函数（async）调取数据可以避免长时等待数据调取
-#使用await表示等待异步函数完成后再执行下一步操作
-async def download(url, filename):
-    response = await pyfetch(url)
-    if response.status == 200:
-        with open(filename, "wb") as f:
-            f.write(await response.bytes())
-}
-
-df = pd.read_csv（'',encoding = "ISO-8859-1"）#GB2312/GBK(汉字),unicode,UTF（兼容ISO-8859-1，比unicode简单）
-airline_data =  pd.read_csv('https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBMDeveloperSkillsNetwork-DV0101EN-SkillsNetwork/Data%20Files/airline_data.csv', 
-                            encoding = "ISO-8859-1",
-                            dtype={'Div1Airport': str, 'Div1TailNum': str, 
-                                   'Div2Airport': str, 'Div2TailNum': str})
-
-df.to_csv(path)#导出数据
-
-#文本
-import requests
-data  = requests.get(url).text
-
-import urllib
-alice_novel = urllib.request.urlopen('')
-
 #lib
 data     'pandas'(df.drop_duplicates(subset=None,keep='first',inplace=False)#subset列名
                   df.info() #显示各列有多少非空值
