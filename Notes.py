@@ -75,7 +75,20 @@ analyse  'scikit-learn'{from sklearn.linear_model import LinearRegression
                         reg.predict()
                         sklearn.preprocessing.MinMaxScaler(feature_range=(0, 1), *, copy=True, clip=False)#标准化多项式回归
                         sklearn.preprocessing.StandardScaler(*, copy=True, with_mean=True, with_std=True)
-}
+                        scikit-learn.model_selection.cross_validate(estimator, #用于拟合的对象
+                                                                    X, #
+                                                                    y=None,#预测变量
+                                                                    *, 
+                                                                    groups=None, 
+                                                                    scoring=None,
+                                                                    cv=None,
+                                                                    n_jobs=None, verbose=0, fit_params=None, pre_dispatch='2*n_jobs', return_train_score=False, return_estimator=False, return_indices=False, error_score=nan)    
+                            scores = cross_validate(lasso, X, y, cv=3,scoring=('r2', 'neg_mean_squared_error'),return_train_score=True)
+                            print(scores['test_neg_mean_squared_error'])
+                            [-3635.5... -3573.3... -6114.7...]
+                            print(scores['train_r2'])
+                            [0.28009951 0.3908844  0.22784907]
+                            }                                                                   
          'skillsnetwork'
          'seaborn'
 visualize'matplotlib'x和y：表示标签或者位置，用来指定显示的索引，默认为None
