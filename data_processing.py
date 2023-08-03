@@ -17,6 +17,7 @@ airline_data =  pd.read_csv('https://cf-courses-data.s3.us.cloud-object-storage.
                             encoding = "ISO-8859-1",
                             dtype={'Div1Airport': str, 'Div1TailNum': str, 
                                    'Div2Airport': str, 'Div2TailNum': str})
+当没有列名时df.read_csv(path,encoding,header=None,names=column_names)
 
 df.to_csv(path)#导出数据
 
@@ -27,6 +28,7 @@ data  = requests.get(url).text
 import urllib
 alice_novel = urllib.request.urlopen('')}
 
+
 {#从数据库获取数据
 import sqlite3
 conn = sqlite3.connect("m4_survey_data.sqlite") # open a database connection
@@ -35,25 +37,33 @@ df = pd.read_sql_query(QUERY,conn) #QUERY为要执行的sql语句
 
 pandas.pivot_table()
 #数据清洗
-#空值、重复值、异常值
+#空值(?/ /N/A)、重复值、异常值
 df.drop_duplicates(subset=None,keep='first',inplace=False)#去除重复值，subset列名
 df.info() #显示各列有多少非空值
 df.isnull()#显示哪些值为缺失值
 df.dropna()#去除空值
 df.fillna(0)#替换空值
+df.replace(missingvalue,newvalue)
 series.value_counts()#计算值频率
+(pandas.options.mode.use_inf_as_na = True#设置正负无穷为空值
+df.isin()#可用于自定义空值判断)
+df.astype(type) #当数据类型错误时转换数据类型,df.dtypes()查看数据类型
 
 #增加新列，调用pandas，numpy
 condlist=[dnp[:,0]=='Yearly',dnp[:,0]=='Monthly',dnp[:,0]=='Weekly']
 choicelist=[1,12,52]
 df['NormalizedAnnualCompensation']=pd.DataFrame(np.select(condlist,choicelist)*dnp[:,1])
 
+#数据归一化
+1.min-max:0~1
+2.z-score:x=(x-Avg(x))/sigma标准差#标准差用df.std()计算
 
-#数据相关性研究需先进行正态分布检测，正态分布检测首选方法是图形观察，即利用直方图、P-P图或Q-Q图进行观察，其次，
-#kstest方法：KS检验，参数分别是：待检验的数据，检验方法（这里设置成norm正态分布），均值与标准差
-#结果返回两个值：statistic → D值，pvalue → P值，p值大于0.05，为正态分布，
-#H0:样本符合  H1:样本不符合 ，如果p>0.05接受H0 ,反之 
-from scipy import stats
-u = s['value'].mean()  # 计算均值
-std = s['value'].std()  # 计算标准差
-stats.kstest(s['value'], 'norm', (u, std))
+#分箱bining
+bins=np.linspace(min(),max(),n)#返回n个等距数字
+group_names=[]
+df['binned']=pd.cut(df[],bins,labels=group_names,include_lowest=True)
+
+#分类变量转为定量变量
+pd.get_dummyies(df[])#生成数字类别，列名为类名，值为0，1
+
+
