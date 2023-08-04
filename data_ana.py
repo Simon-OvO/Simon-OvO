@@ -4,7 +4,7 @@
 #H0:样本符合  H1:样本不符合 ，如果p>0.05接受H0 ,反之 
 from scipy import stats
 u = s['value'].mean()  # 计算均值
-std = s['value'].std()  # 计算标准差
+std = s['value'].std()  # 计算标准差MSE开方
 stats.kstest(s['value'], 'norm', (u, std))
 
 #计算列的两两相关性
@@ -35,6 +35,33 @@ y_hat=lm.predict(x_test)
 lr.intercept_#b0截距
 lr.coef_#b1斜率
 
+decision_function(X)#Predict confidence scores for samples.
+densify()#Convert coefficient matrix to dense array format.
+fit(X, y[, sample_weight])#Fit the model according to the given training data.
+get_metadata_routing()#Get metadata routing of this object.
+get_params([deep])#Get parameters for this estimator.
+predict(X)#Predict class labels for samples in X.
+predict_log_proba(X)#Predict logarithm of probability estimates.
+predict_proba(X)#Probability estimates.
+score(X, y[, sample_weight])#R^2，X为测试组，y为真实数据
+set_fit_request(*[, sample_weight])#Request metadata passed to the fit method.
+set_params(**params)#Set the parameters of this estimator.
+set_score_request(*[, sample_weight])#Request metadata passed to the score method.
+sparsify()#Convert coefficient matrix to sparse format.
+
+g=sns.PairGrid(df, hue="",vars=["", ""])#vars指定列
+g=g.map(sns.scatterplot)
+g = g.add_legend()  
+
+g.map_offdiag(sns.scatterplot)  #指定非对角线绘图类型为散点图
+g.map_diag(sns.histplot)  #指定对角线绘图类型为直方图
+g = g.map_upper(sns.scatterplot)  # 指定上三角绘制散点图
+g = g.map_lower(sns.kdeplot)  # 指定下三角绘制核密度图
+
+g = sns.FacetGrid(tips, col="time",  row="sex")
+g.map(sns.scatterplot, "total_bill", "tip")
+g.refline(y=tips["tip"].median())#添加辅助线
+
 #回归图
 import seaborn as sns
 sns.regplot(data=None, *, x=None, y=None, x_estimator=None, x_bins=None, x_ci='ci', scatter=True, fit_reg=True, ci=95, 
@@ -64,6 +91,13 @@ seaborn.displot(data=None, *, x=None, y=None, hue=None, row=None, col=None, weig
 g.set_axis_labels("Density (a.u.)", "Flipper length (mm)")
 g.set_titles("{col_name} penguins")
 
+#两图排列
+import matploylib.plotly as plt
+fig, ax =plt.subplots(1,3,constrained_layout=True, figsize=(12, 3))
+sns.displot(df['price'], hist=False, color="r", label="Actual Value",ax=ax[])
+#两图合一
+ax1 = sns.displot(df['price'], hist=False, color="r", label="Actual Value")
+sns.displot(Y_hat, hist=False, color="b", label="Fitted Values" , ax=ax1)
 #将两个图画在一起需定位axis ax=sns.displot() /n sns.displot(,axis=ax) 
 
 #多项式回归：首先需要标准化数据
@@ -72,9 +106,10 @@ from sklearn.preprocessing import StandardScaler
 scal=StandardScaler()
 scal.fit(df[['','']])
 
+#使用PolynomialFeatures将变量生成多项式比如 PolynomialFeatures(degree=2).fit([x1,x2],y)生成[x1,x2,x1*x2,x1^2,x2^2]
 from sklearn.preprocessing import PolynomialFeatures
 pf=PolynomialFeatures(degree=2, *, interaction_only=False, include_bias=True, order='C')
-#degree:int or tuple (min_degree, max_degree)/order:F/C/include_bias：True为保留截距列/interaction_only：True为仅产生交互项
+#degree:int or tuple (min_degree, max_degree)/order:F/C/include_bias：True为保留截距/interaction_only：True为仅产生交互项
 
 #PolynomialFeatures对应method
 fit(X[, y])#Compute number of output features.
@@ -89,6 +124,8 @@ transform(X) #Transform data to polynomial features.
 #回归预测
 f = np.polyfit(x, y, 3)
 p = np.poly1d(f)
+x_new=np.linspace(min, max, 100)#生成多个数据
+y_new = p(x_new)
 
 from sklearn.pipeline import Pipeline
 Input=[('scale',StandardScaler()),('polynormial',PolynomialFeatures(degree=2,)),('mode',LinearRegression())]
@@ -96,4 +133,5 @@ pipe=Pipeline(Input)
 pipe.fit(df[['','','','']],y)
 y_hat=pipe.predict(df[['','','',']])
 
-np.linspace(15, 55, 100)
+
+plt.plot(independent_variable, dependent_variabble, '.', x_new, y_new, '-')#一个图多用'.'表示散点'-'表示折线'g-'字母表示颜色
