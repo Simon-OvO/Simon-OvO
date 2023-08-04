@@ -87,8 +87,13 @@ set_params(**params)#Set the parameters of this estimator.
 transform(X) #Transform data to polynomial features.
 
 #回归预测
+f = np.polyfit(x, y, 3)
+p = np.poly1d(f)
+
 from sklearn.pipeline import Pipeline
 Input=[('scale',StandardScaler()),('polynormial',PolynomialFeatures(degree=2,)),('mode',LinearRegression())]
 pipe=Pipeline(Input)
 pipe.fit(df[['','','','']],y)
 y_hat=pipe.predict(df[['','','',']])
+
+np.linspace(15, 55, 100)
