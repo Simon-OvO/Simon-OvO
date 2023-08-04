@@ -35,7 +35,9 @@ conn = sqlite3.connect("m4_survey_data.sqlite") # open a database connection
 df = pd.read_sql_query(QUERY,conn) #QUERY为要执行的sql语句
 }
 
-pandas.pivot_table()
+pandas.pivot_tableDataFrame.pivot_table(values=None, index=None, columns=None, aggfunc='mean', fill_value=None, margins=False, 
+                                        dropna=True, margins_name='All', observed=False, sort=True)#透视表
+df=df._get_numeric_data()
 #数据清洗
 #空值(?/ /N/A)、重复值、异常值
 df.drop_duplicates(subset=None,keep='first',inplace=False)#去除重复值，subset列名
@@ -62,9 +64,30 @@ choicelist=[1,12,52]
 df['NormalizedAnnualCompensation']=pd.DataFrame(np.select(condlist,choicelist)*dnp[:,1])
 #选择多列df1=df[['','','']]
 
-#数据归一化
+#数据标准化
 1.min-max:0~1
-2.z-score:x=(x-Avg(x))/sigma标准差#标准差用df.std()计算
+  sklearn.preprocessing.MinMaxScaler(feature_range=(0, 1), *, copy=True, clip=False)
+2.z-score:x=(x-Avg(x))/sigma标准差（用df.std()计算）
+  sklearn.preprocessing.StandardScaler（*, copy=True, with_mean=True, with_std=True）
+3.减去中位数并根据四分位数范围缩放数据（默认为 IQR：四分位数范围）。 IQR 是第一个四分位数（0.25）和第三个四分位数（0.75）之间的范围。
+  sklearn.preprocessing.RobustScaler(*, with_centering=True, with_scaling=True, quantile_range=(25.0, 75.0), copy=True, 
+                                     unit_variance=False)
+4.幂变换是一系列参数化、单调变换，使数据更像高斯分布。这对于与异方差（非恒定方差）相关的建模问题或需要正态性的其他情况非常有用。
+  sklearn.preprocessing.PowerTransformer(method='yeo-johnson', *, standardize=True, copy=True)
+  #‘yeo-johnson’ 可用于正负值 ‘box-cox’只能用于正值
+5.使用分位数信息转换特征。该方法将特征转换为服从均匀或正态分布。分散最频繁的值，减少异常值的影响，但是是非线性变换可能会扭曲线性相关性。
+  sklearn.preprocessing.QuantileTransformer(*, n_quantiles=1000, output_distribution='uniform', ignore_implicit_zeros=False, 
+                                            subsample=10000, random_state=None, copy=True)
+  #output_distribution：'uniform'均匀分布'normal'高斯分布
+
+fit(X[, y])#Compute number of output features.
+fit_transform(X[, y])#Fit to data, then transform it.#常用
+get_feature_names_out([input_features])#Get output feature names for transformation.defult=None
+get_metadata_routing()#Get metadata routing of this object.
+get_params([deep])#Get parameters for this estimator.
+set_output(*[, transform])#Set output container.
+set_params(**params)#Set the parameters of this estimator.
+transform(X) #Transform data to polynomial features.
 
 #分箱bining
 bins=np.linspace(min(),max(),n)#返回n个等距数字
