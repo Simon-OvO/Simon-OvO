@@ -33,6 +33,17 @@ alice_novel = urllib.request.urlopen('')}
 import sqlite3
 conn = sqlite3.connect("m4_survey_data.sqlite") # open a database connection
 df = pd.read_sql_query(QUERY,conn) #QUERY为要执行的sql语句
+
+#操作数据库
+cursor_obj = conn.cursor()
+cursor_obj.execute("DROP TABLE IF EXISTS INSTRUCTOR")
+conn.close()
+
+%load_ext sql
+%sql sqlite:///SQLiteMagic.db#连接数据库
+dt=%sql select * from tablename
+df=dt.DataFrame()
+在前面加：使用python变量
 }
 
 df.merge(right, how='inner', on=None, left_on=None, right_on=None, left_index=False, right_index=False, sort=False, suffixes=('_x', '_y'),
@@ -111,4 +122,6 @@ df.groupby(['',''],as_index=False)
 df.get_group('')#获取分类数据
 df.pivot(index='',columns='')#透视图的columns为两列的数据
 MultiIndex.levels
+
+
 
