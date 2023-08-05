@@ -35,9 +35,15 @@ conn = sqlite3.connect("m4_survey_data.sqlite") # open a database connection
 df = pd.read_sql_query(QUERY,conn) #QUERY为要执行的sql语句
 }
 
+df.merge(right, how='inner', on=None, left_on=None, right_on=None, left_index=False, right_index=False, sort=False, suffixes=('_x', '_y'),
+         copy=None, indicator=False, validate=None)#how={‘left’, ‘right’, ‘outer’, ‘inner’, ‘cross’}
+
 pandas.pivot_tableDataFrame.pivot_table(values=None, index=None, columns=None, aggfunc='mean', fill_value=None, margins=False, 
                                         dropna=True, margins_name='All', observed=False, sort=True)#透视表
 df=df._get_numeric_data()
+
+
+
 #数据清洗
 #空值(?/ /N/A)、重复值、异常值
 df.drop_duplicates(subset=None,keep='first',inplace=False)#去除重复值，subset列名
