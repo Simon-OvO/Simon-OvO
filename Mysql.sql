@@ -14,3 +14,6 @@ SELF JOIN	将一个表连接到自身，就像该表是两个表一样。为了�
 CROSS JOIN	交叉连接，从两个或者多个连接表中返回记录集的笛卡尔积。
 
 is null#空值判断不用=
+SUM(IF(rating < 3, 1, 0))
+sum(first=customer_pref_delivery_date)
+使用group by 后面几列都是以group by的列索引
