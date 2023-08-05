@@ -127,6 +127,56 @@ with open('/Example2.txt','r') as readfile:
     with open('Example3.txt','w') as writefile:
           for line in readfile:
                 writefile.write(line)
+           
+#当请求的文件是图片时，先建立本地图片文件，然后写入response.content
+from PIL import Image
+path=os.path.join(os.getcwd(),'image.png')
+with open(path,'wb') as f:
+    f.write(r.content)
+Image.open(path) 
+
+from PIL import Image 
+import urllib.request
+urllib.request.urlretrieve("https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/dog-puppy-on-garden-royalty-free-image-1586966191.jpg", "dog.jpg")
+img = Image.open('dog.jpg')   
+display(img)# Output Images 
+
+import xml.etree.ElementTree as ET
+
+Writing with xml.etree.ElementTree
+# create the file structure
+employee = ET.Element('employee')
+details = ET.SubElement(employee, 'details')
+first = ET.SubElement(details, 'firstname')
+second = ET.SubElement(details, 'lastname')
+third = ET.SubElement(details, 'age')
+first.text = 'Shiv'
+second.text = 'Mishra'
+third.text = '23'
+
+# create a new XML file with the results
+mydata1 = ET.ElementTree(employee)
+# myfile = open("items2.xml", "wb")
+# myfile.write(mydata)
+with open("new_sample.xml", "wb") as files:
+    mydata1.write(files)
+Reading with xml.etree.ElementTree
+tree = etree.parse("Sample-employee-XML-file.xml")
+root = tree.getroot()
+columns = ["firstname", "lastname", "title", "division", "building","room"]
+datatframe = pd.DataFrame(columns = columns)
+for node in root: 
+    firstname = node.find("firstname").text
+    lastname = node.find("lastname").text 
+    title = node.find("title").text   
+    division = node.find("division").text     
+    building = node.find("building").text   
+    room = node.find("room").text    
+    datatframe = datatframe.append(pd.Series([firstname, lastname, title, division, building, room], index = columns), ignore_index = True)
+
+Reading xml file using pandas.read_xml function
+# Herein xpath we mention the set of xml nodes to be considered for migrating  to the dataframe which in this case is details node under employees.
+df=pd.read_xml("Sample-employee-XML-file.xml", xpath="/employees/details") 
 
 #定义类Circle和方法
 import matplotlib.pyplot as plt
@@ -150,7 +200,7 @@ class Circle(object):
         plt.show()  
       
 circle1=Circle(10, 'red')
-dir(circle1)
+dir(circle1)#显示对象的所有可用方法
 #错误处理
 a = 1
 try:b = int(input("Please enter a number to divide a"))
@@ -166,3 +216,4 @@ else:
 finally:
     print("Processing Complete")
 
+ 二进制文件：JPEGs GIFs,  MP3s ， Word or PDF
