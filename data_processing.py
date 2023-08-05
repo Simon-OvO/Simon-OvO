@@ -24,10 +24,38 @@ df.to_csv(path)#导出数据
 #文本
 import requests
 data  = requests.get(url).text
+(results = json.loads(data)#用json打开可以转成df格式
+ df2 = pd.json_normalize(results)#将嵌套表格展开)
 
 import urllib
 alice_novel = urllib.request.urlopen('')}
 
+#网页文件
+from bs4 import BeautifulSoup
+soup = BeautifulSoup(html, 'html5lib')
+soup.prettify()# Returns formatted html
+soup.find(tag)# Find the first instance of an HTML tag
+soup.find_all(tag)# Find all instances of an HTML tag
+
+table_bs.find_all(id="flight")
+table_bs.find_all(string="Florida")
+two_tables_bs.find("table",class_='pizza')
+
+tag_object=soup.h3
+tag_child =tag_object.b
+tag_object.parent
+tag_object.next_sibling#同级下一个
+tag_child.attrs#直接返回字典
+tag_child.string
+
+for i,row in enumerate(table_rows):
+    print("row",i)
+    cells=row.find_all('td')
+    for j,cell in enumerate(cells):
+        print('colunm',j,"cell",cell)
+
+for row in table.find_all('tr'): # in html table row is represented by the tag <tr>
+    cols = row.find_all('td') # in html a column is represented by the tag <td>
 
 {#从数据库获取数据
 import sqlite3
@@ -46,6 +74,7 @@ df=dt.DataFrame()
 在前面加：使用python变量
 }
 
+    
 df.merge(right, how='inner', on=None, left_on=None, right_on=None, left_index=False, right_index=False, sort=False, suffixes=('_x', '_y'),
          copy=None, indicator=False, validate=None)#how={‘left’, ‘right’, ‘outer’, ‘inner’, ‘cross’}
 
