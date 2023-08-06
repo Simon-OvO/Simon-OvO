@@ -98,6 +98,7 @@ df[''].value_counts().idxmax()#计算最常见值
 df.isin()#可用于自定义空值判断)
 df.astype(type) #当数据类型错误时转换数据类型,参数copy默认值False，df.dtypes()查看数据类型
 df.rename(columns={'':''}, inplace=True)#重命名列名
+df.sort_values('column', ascending=True/False)
 
 #自定义排序
 df[].astype('category')
