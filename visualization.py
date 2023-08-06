@@ -1,24 +1,5 @@
 %matplotlib inline #用于将matplotlib 绘制的图形嵌入到Notebook 中
 
-#lib
-data     'pandas'(df.drop_duplicates(subset=None,keep='first',inplace=False)#subset列名
-                  df.info() #显示各列有多少非空值
-                  df.isnull()#显示那个值为缺失值
-                  df.dropna()
-                  df.fillna(0)
-                  series.value_counts()#计算值频率
-
-         'scipy'#统计{stats.kstest(s['value'], 'norm', (u, std))
-                      KstestResult(statistic=0.01441344628501079, pvalue=0.9855029319675546)，p值大于0.05为正太分布}
-          numpy{linspace
-                np.transpose()/ndarray.T
-                numpy.linalg.inv()#倒数
-                np.select#类似excel中xlookup）
-                 condlist=[dnp[:,0]=='Yearly',dnp[:,0]=='Monthly',dnp[:,0]=='Weekly']
-                 choicelist=[1,12,52]
-                 df['NormalizedAnnualCompensation']=pd.DataFrame(np.select(condlist,choicelist)*dnp[:,1])
-
-
 webscraping         from bs4 import BeautifulSoup  soup = BeautifulSoup(data,"html5lib")
 
                     for link in soup.find_all('a'):  # in html anchor/link is represented by the tag <a>
