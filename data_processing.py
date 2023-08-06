@@ -80,6 +80,7 @@ df.merge(right, how='inner', on=None, left_on=None, right_on=None, left_index=Fa
 
 pandas.pivot_tableDataFrame.pivot_table(values=None, index=None, columns=None, aggfunc='mean', fill_value=None, margins=False, 
                                         dropna=True, margins_name='All', observed=False, sort=True)#透视表
+wea_piv.columns = [col[0] if not(col[1]) else '{1}_{0}'.format(*col) for col in wea_piv.columns.values]#从
 df=df._get_numeric_data()
 
 
