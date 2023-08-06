@@ -100,6 +100,11 @@ ax1 = sns.displot(df['price'], hist=False, color="r", label="Actual Value")
 sns.displot(Y_hat, hist=False, color="b", label="Fitted Values" , ax=ax1)
 #将两个图画在一起需定位axis ax=sns.displot() /n sns.displot(,axis=ax) 
 
+plotly.subplots.make_subplots(rows=1, cols=1, shared_xaxes=False, shared_yaxes=False, start_cell='top-left', print_grid=False, 
+                              horizontal_spacing=None, vertical_spacing=None, subplot_titles=None, column_widths=None, row_heights=None,
+                              specs=None, insets=None, column_titles=None, row_titles=None, x_title=None, y_title=None, figure=None, 
+                              **kwargs)
+
 #多项式回归：首先需要标准化数据
 #normalization
 from sklearn.preprocessing import StandardScaler
