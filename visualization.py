@@ -172,7 +172,7 @@ Aus_map.add_child(aus_reg)}
          'Plotly'#交互{
                        
          }
-         Ploty Express#简洁图表{px.scatter(dataframe, x=x_column, y=y_column，title='title')
+         Ploty Express#简洁图表{px.scatter(dataframe, x=x_column, y=y_column，title='title')#参数labels=dict(x='',y='')
                                px.line( x=x_column, y=y_column,'title')
                                px.bar( x=x_column, y=y_column,title='title',oritention=“h)
                                px.sunburst(dataframe, path=[col1,col2..], values='column',title='title')
@@ -180,7 +180,8 @@ Aus_map.add_child(aus_reg)}
                                px.scatter(bub_data, x="City", y="Numberofcrimes",size="Numberofcrimes",hover_name="City", title='Crime Statistics')    #bubble
                                px.pie(values=x,names=y,title="title")
                                }
-         Plotly Graph Objects{go.Scatter(x=x, y=y, mode='markers') #mode='lines'
+         Plotly Graph Objects：json object
+         {fig=go.Scatter(x=x, y=y, mode='markers') #mode='lines'
                               fig.add_trace(go.Scatter(x=months_array, y=no_bicycle_sold_array))
                               fig.update_layout(title='Bicycle Sales', xaxis_title='Months', yaxis_title='Number of Bicycles Sold                     
                               }
