@@ -105,7 +105,7 @@ df.sort_values('column', ascending=True/False)
 df[].astype('category')
 cat_dtype = CategoricalDtype(categories=[2, 1], ordered=True)
 df[].astype(cat_dtype)
-
+.dt.strftime（“%Y-%m-%d”)
 #增加新列，调用pandas，numpy
 condlist=[dnp[:,0]=='Yearly',dnp[:,0]=='Monthly',dnp[:,0]=='Weekly']
 choicelist=[1,12,52]
