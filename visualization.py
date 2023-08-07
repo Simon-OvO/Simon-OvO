@@ -130,7 +130,12 @@ plt.show()}
                   Scatter Plot}
                   
 
-         'seaborn'#countplot分类计数
+         'seaborn'#countplot分类计数{
+         seaborn.kdeplot(data=None, *, x=None, y=None, hue=None, weights=None, palette=None, hue_order=None, hue_norm=None, 
+         color=None, fill=None, multiple='layer', common_norm=True, common_grid=False, cumulative=False, bw_method='scott', bw_adjust=1,
+         warn_singular=True, log_scale=None, levels=10, thresh=0.05, gridsize=200, cut=3, clip=None, legend=True, cbar=False, 
+         cbar_ax=None, cbar_kws=None, ax=None, **kwargs)
+         }
          'Foleyum'#交互{# instantiate a feature group 
                         aus_reg = folium.map.FeatureGroup()
                         # Create a Folium map centered on Australia
@@ -162,7 +167,15 @@ Aus_map.add_child(aus_reg)}
                                px.histogram(x=x,title="title")
                                px.scatter(bub_data, x="City", y="Numberofcrimes",size="Numberofcrimes",hover_name="City", title='Crime Statistics')    #bubble
                                px.pie(values=x,names=y,title="title")
-                               }
+                               px.imshow(corr,color_continuous_scale='RdBu')
+                               px.scatter_matrix(df)#矩阵散点图
+                               px.violin(data_frame=None, x=None, y=None, color=None, facet_row=None, facet_col=None, facet_col_wrap=0, facet_row_spacing=None,
+                               facet_col_spacing=None, hover_name=None, hover_data=None, custom_data=None, animation_frame=None, animation_group=None, 
+                               category_orders=None, labels=None, color_discrete_sequence=None, color_discrete_map=None, orientation=None, violinmode=None, log_x=False, log_y=False, range_x=None, range_y=None, points=None, box=False, title=None, template=None, width=None, height=None) 
+                               fig = make_subplots(rows=5, cols=2,specs=[[{}, {"rowspan": 2}], [{}, None],[{"rowspan": 2, "colspan": 2}, None],
+                               [None, None],[{}, {}]],
+                               fig.add_trace(go.Bar(x=DF.groupby('TotRmsAbvGrd')['SalePrice'].mean().index, y=DF.groupby('TotRmsAbvGrd')['SalePrice'].mean(),
+                               name="Total rooms above gr.",marker_color='#a1a1a1'), row=1, col=1)}#子图
          Plotly Graph Objects：json object
          {fig=go.Scatter(x=x, y=y, mode='markers') #mode='lines'
                               fig.add_trace(go.Scatter(x=months_array, y=no_bicycle_sold_array))
