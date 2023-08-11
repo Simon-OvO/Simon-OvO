@@ -82,8 +82,12 @@ pandas.pivot_tableDataFrame.pivot_table(values=None, index=None, columns=None, a
                                         dropna=True, margins_name='All', observed=False, sort=True)#透视表
 wea_piv.columns = [col[0] if not(col[1]) else '{1}_{0}'.format(*col) for col in wea_piv.columns.values]#从
 df=df._get_numeric_data()
-
-
+#对于列进行重排序
+order = [1,11,21,31,41,51,61,71,81,91,101,111,121,131,141,151,161,171,181,191]
+df_c = df_c[order]
+#提取数字
+pattern = r"\D*(\d+)\D*"
+df_c.columns.str.extract(pattern)[]
 
 #数据清洗
 #空值(?/ /N/A)、重复值、异常值
