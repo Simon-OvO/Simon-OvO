@@ -171,7 +171,7 @@ Aus_map.add_child(aus_reg)}
                                px.histogram(x=x,title="title")
                                px.scatter(bub_data, x="City", y="Numberofcrimes",size="Numberofcrimes",hover_name="City", title='Crime Statistics')    #bubble
                                px.pie(values=x,names=y,title="title")
-                               px.imshow(corr,color_continuous_scale='RdBu')
+                               px.imshow(corr,color_continuous_scale='RdBu'，color_continuous_midpoint=0)
                                px.scatter_matrix(df)#矩阵散点图
                                px.violin(data_frame=None, x=None, y=None, color=None, facet_row=None, facet_col=None, facet_col_wrap=0, facet_row_spacing=None,
                                facet_col_spacing=None, hover_name=None, hover_data=None, custom_data=None, animation_frame=None, animation_group=None, 
