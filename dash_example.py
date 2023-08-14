@@ -166,5 +166,7 @@ if __name__ == '__main__':
 
 inline元素不会独占一行，多个相邻的行内元素会排列在同一行里，直到一行排列不下，才会新换一行，其宽度随元素的内容而变化。
 inline元素设置width,height属性无效。
-inline元素的margin和padding属性，水平方向的padding-left, padding-right, margin-left, margin-right都产生边距效果；但竖直方向的padding-top, padding-bottom, margin-top, margin-bottom不会产生边距效果。
+inline元素的margin和padding属性，水平方向的padding-left, padding-right, margin-left, margin-right都产生边距效果；
+但竖直方向的padding-top, padding-bottom, margin-top, margin-bottom不会产生边距效果。
+Input("click-div", "n_clicks")#所有dash.HTML组件的都含有"n_clicks"属性可作为输入
 
