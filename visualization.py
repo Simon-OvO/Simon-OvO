@@ -41,7 +41,8 @@ analyse  'scikit-learn'{from sklearn.linear_model import LinearRegression
          'skillsnetwork'
          'seaborn'seaborn.heatmap(data, *, vmin=None, vmax=None, cmap=None, center=None, robust=False, annot=None, fmt='.2g', 
          annot_kws=None, linewidths=0, linecolor='white', cbar=True, cbar_kws=None, cbar_ax=None, square=False, xticklabels='auto', 
-         yticklabels='auto', mask=None, ax=None, **kwargs)#annot=True显示数值
+         yticklabels='auto', mask=None, ax=None, **kwargs)#annot=True显示数值，mask隐藏格式
+         
 visualize'matplotlib'x和y：表示标签或者位置，用来指定显示的索引，默认为None
                      kind：表示绘图的类型，默认为line，折线图(line：折线图,bar/barh：柱状图（条形图），纵向/横向,pie：饼状图
                                               hist：直方图（数值频率分布）,box：箱型图,kde：密度图，主要对柱状图添加Kernel 概率密度线
