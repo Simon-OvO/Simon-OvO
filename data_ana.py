@@ -6,6 +6,8 @@ from scipy import stats
 u = s['value'].mean()  # 计算均值
 std = s['value'].std()  # 计算标准差MSE开方
 stats.kstest(s['value'], 'norm', (u, std))
+from sklearn.metrics import r2_score
+r2_score(yhat,y)#计算R2
 
 #计算列的两两相关性
 df.corr(method='pearson', min_periods=1, numeric_only=False)
