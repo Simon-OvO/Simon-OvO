@@ -144,3 +144,4 @@ y_hat=pipe.predict(df[['','','',']])
 plt.plot(independent_variable, dependent_variabble, '.', x_new, y_new, '-')#一个图多用'.'表示散点'-'表示折线'g-'字母表示颜色
 Rsqu_test.at[n,i]=mean(cross_val_score(Ridge(),x_pr,y,cv=4))#使用at在循环中更改df数据
 from collections import Counter z = ['blue', 'red', 'blue', 'yellow', 'blue', 'red'] Counter(z)
+statistics.mode(train[(train['Pclass']==3)]['Fare'])#取众数
