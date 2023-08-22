@@ -88,6 +88,17 @@ df_c = df_c[order]
 #提取数字
 pattern = r"\D*(\d+)\D*"
 df_c.columns.str.extract(pattern)[]
+#数据处理
+df.describe()#输出数据规格['count', 'mean', 'std', 'min', '25%', '50%', '75%', 'max'],默认不包含object类型，可用参数include
+series.to_frame()
+df.groupby(['',''],as_index=False)
+df.get_group('')#获取分类数据
+df.pivot(index='',columns='')#透视图的columns为两列的数据
+MultiIndex.levels
+train['Name'].str.extract(r'(?<=\,\s)(.+?)(?=\.)')#取', '与'.'之间的字符，正则表达式，。前要加斜杠
+str.extract(' ([A-Za-z]+)\.', expand=False)#取。前的字母
+df['Sex']=df['Sex'].map({'female':1,'male',0}).astype(int)#转换数据类新
+
 
 #数据清洗
 #空值(?/ /N/A)、重复值、异常值
@@ -103,7 +114,8 @@ df[''].value_counts().idxmax()#计算最常见值
 df.isin()#可用于自定义空值判断)
 df.astype(type) #当数据类型错误时转换数据类型,参数copy默认值False，df.dtypes()查看数据类型
 df.rename(columns={'':''}, inplace=True)#重命名列名
-df.sort_values('column', ascending=True/False)
+df.sort_values('column', ascending=True/False)#排序
+pd.concat([train,test]，axis=0)#上下左右合并
 
 #自定义排序
 df[].astype('category')
@@ -151,12 +163,27 @@ d_pd.get_dummyies(df[])#生成类别df，列名为类名，值为0，1
 df = pd.concat([df, d_pd], axis=1)#连接表
 df.drop("", axis = 1, inplace=True)#删除列
 
-df.describe()#输出数据规格['count', 'mean', 'std', 'min', '25%', '50%', '75%', 'max'],默认不包含object类型，可用参数include
-series.to_frame()
-df.groupby(['',''],as_index=False)
-df.get_group('')#获取分类数据
-df.pivot(index='',columns='')#透视图的columns为两列的数据
-MultiIndex.levels
+#根据变量间关系填充平均值与标准差的随机数
+for dataset in combine:
+    for i in range(0, 2):
+        for j in range(0, 3):
+            guess_df = dataset[(dataset['Sex'] == i) & \
+                                  (dataset['Pclass'] == j+1)]['Age'].dropna()
 
+            # age_mean = guess_df.mean()
+            # age_std = guess_df.std()
+            # age_guess = rnd.uniform(age_mean - age_std, age_mean + age_std)
 
+            age_guess = guess_df.median()
 
+            # Convert random age float to nearest .5 age
+            guess_ages[i,j] = int( age_guess/0.5 + 0.5 ) * 0.5
+            
+    for i in range(0, 2):
+        for j in range(0, 3):
+            dataset.loc[ (dataset.Age.isnull()) & (dataset.Sex == i) & (dataset.Pclass == j+1),\
+                    'Age'] = guess_ages[i,j]
+
+    dataset['Age'] = dataset['Age'].astype(int)
+
+train_df.head()
