@@ -163,6 +163,9 @@ d_pd.get_dummyies(df[])#生成类别df，列名为类名，值为0，1
 df = pd.concat([df, d_pd], axis=1)#连接表
 df.drop("", axis = 1, inplace=True)#删除列
 
+Title_mapping = {"Mr": 3, "Master": 1, "Miss": 2, "Mrs": 4}
+df['Title'] = df['Title'].map(Title_mapping)#标签分类
+
 #根据变量间关系填充平均值与标准差的随机数
 for dataset in combine:
     for i in range(0, 2):
