@@ -1,6 +1,5 @@
 - 👋 Hi, I’m Simon-OvO.
-- 👀 I’m interested in data science.
-- 🌱 I’m currently learning how to use tools for data science.
+- 👀 I’m interested in C++.
 - 💞️ I’m looking to collaborate on studies.
 - 📫 How to reach me qq:1032007611.
 <!---
