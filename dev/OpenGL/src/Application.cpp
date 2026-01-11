@@ -1,4 +1,4 @@
-#include <GL/glew.h>
+#include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <iostream>
 
@@ -38,6 +38,17 @@ static unsigned int CreateShaderProgram(const std::string& vertexShader, const s
     return program;
 }
 
+void window_size_callback(GLFWwindow* window, int width, int height)
+{
+    glViewport(0, 0, width, height);
+}
+
+void escape_callback(GLFWwindow* window)
+{
+    if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+		glfwSetWindowShouldClose(window, true);
+}
+
 int main(void)
 {
     GLFWwindow* window;
@@ -57,34 +68,43 @@ int main(void)
     /* Make the window's context current */
     glfwMakeContextCurrent(window);
 
-    if (glewInit() != GLEW_OK)
-        std::cout << "Error!!" << std::endl;
+    if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
+    {
+        std::cout << "Failed to initialize GLAD" << std::endl;
+		return -1;
+    }
+
+	glViewport(0, 0, 640, 480);//default window size
+
+	glfwSetFramebufferSizeCallback(window, window_size_callback);
 
     std::cout << glGetString(GL_VERSION) << std::endl;
 
-    float position[6] =
+    float position[9] =
     {
-        -0.5f, -0.5f,
-         0.5f, -0.5f,
-         0.0f,  0.5f
+        -0.5f, -0.5f, 0.0f,
+		 0.5f, -0.5f, 0.0f,
+		 0.0f,  0.5f, 0.0f
     };
 
     unsigned int buffer;
 	glGenBuffers(1, &buffer); 
     glBindBuffer(GL_ARRAY_BUFFER, buffer);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(float)*6, position, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(position), position, GL_STATIC_DRAW);
 
 	glEnableVertexAttribArray(0);
-	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), 0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), 0);
 
 
     /* Loop until the user closes the window */
     while (!glfwWindowShouldClose(window))
     {
         /* Render here */
+		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
 
 		glDrawArrays(GL_TRIANGLES, 0, 3);
+		escape_callback(window);
 
         /* Swap front and back buffers */
         glfwSwapBuffers(window);
