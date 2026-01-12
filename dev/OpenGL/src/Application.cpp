@@ -1,8 +1,45 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <iostream>
+#include <string>
+#include <fstream>
+#include <sstream>
 
-static int CreateShader(const std::string& source, unsigned int type)
+
+struct ShaderProgramSource
+{
+    std::string VertexSource;
+    std::string FragmentSource;
+};
+
+static ShaderProgramSource ParseShader(const std::string& source)
+{
+	std::ifstream stream(source);
+
+    enum class ShaderType
+    {
+        NONE = -1, VERTEX = 0, FRAGMENT = 1
+	};
+
+    std::string line;
+    std::stringstream ss[2];
+	ShaderType type = ShaderType::NONE;
+    while (getline(stream, line))
+    {
+		if (line.find("#shader vertex") != std::string::npos)
+			type = ShaderType::VERTEX;
+        else if(line.find("#shader fragment") != std::string::npos)
+            type = ShaderType::FRAGMENT;
+        else
+        {
+            if (type != ShaderType::NONE)
+                ss[(int)type] << line << '\n';
+		}
+	}
+	return { ss[0].str(), ss[1].str() };
+}
+
+static int CompileShader(const std::string& source, unsigned int type)
 {
     unsigned int id = glCreateShader(type);
     const char* src = source.c_str();
@@ -27,14 +64,27 @@ static int CreateShader(const std::string& source, unsigned int type)
 static unsigned int CreateShaderProgram(const std::string& vertexShader, const std::string& fragmentShader)
 {
     unsigned int program = glCreateProgram();
-    unsigned int vs = CreateShader(vertexShader, GL_VERTEX_SHADER);
-    unsigned int fs = CreateShader(fragmentShader, GL_FRAGMENT_SHADER);
+    unsigned int vs = CompileShader(vertexShader, GL_VERTEX_SHADER);
+    unsigned int fs = CompileShader(fragmentShader, GL_FRAGMENT_SHADER);
     glAttachShader(program, vs);
     glAttachShader(program, fs);
     glLinkProgram(program);
+	int isLinked;
+	glGetProgramiv(program, GL_LINK_STATUS, &isLinked);
+	if (!isLinked)
+    {
+        int length;
+        glGetProgramiv(program, GL_INFO_LOG_LENGTH, &length);
+        char* message = (char*)alloca(length * sizeof(char));
+        glGetProgramInfoLog(program, length, &length, message);
+        std::cout << "Failed to link program!" << std::endl;
+        std::cout << message << std::endl;
+        glDeleteProgram(program);
+        return 0;
+    }
     glValidateProgram(program);
-    glDeleteProgram(vs);
-    glDeleteProgram(fs);
+	glDeleteShader(vs);//shader objects can be deleted after linking
+    glDeleteShader(fs);
     return program;
 }
 
@@ -80,12 +130,19 @@ int main(void)
 
     std::cout << glGetString(GL_VERSION) << std::endl;
 
-    float position[9] =
+    float position[] =
     {
-        -0.5f, -0.5f, 0.0f,
-		 0.5f, -0.5f, 0.0f,
-		 0.0f,  0.5f, 0.0f
+        -0.5f,  0.0f, 0.0f,
+		 0.0f, -0.3f, 0.0f,
+		 0.5f,  0.0f, 0.0f,
+		 0.0f,  0.3f, 0.0f
     };
+
+    unsigned int indices[] =
+    {
+        0, 1, 2,
+        2, 3, 0
+	};
 
     unsigned int buffer;
 	glGenBuffers(1, &buffer); 
@@ -95,15 +152,24 @@ int main(void)
 	glEnableVertexAttribArray(0);
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), 0);
 
+    unsigned int ibo;
+    glGenBuffers(1, &ibo);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+
+    ShaderProgramSource source = ParseShader("res/shaders/Basic.shader");
+	unsigned int program = CreateShaderProgram(source.VertexSource, source.FragmentSource);
+    glUseProgram(program);
+
 
     /* Loop until the user closes the window */
     while (!glfwWindowShouldClose(window))
     {
         /* Render here */
-		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+		//glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
 
-		glDrawArrays(GL_TRIANGLES, 0, 3);
+		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
 		escape_callback(window);
 
         /* Swap front and back buffers */
@@ -112,6 +178,8 @@ int main(void)
         /* Poll for and process events */
         glfwPollEvents();
     }
+
+	glDeleteProgram(program);
 
     glfwTerminate();
     return 0;

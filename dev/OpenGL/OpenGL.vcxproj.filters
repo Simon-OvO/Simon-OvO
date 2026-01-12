@@ -21,5 +21,8 @@
     <ClCompile Include="src\glad.c">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="res\shaders\Basic.shader">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
